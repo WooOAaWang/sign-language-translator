@@ -9,11 +9,12 @@ from collections import Counter
 # 설정
 # ============================
 VIDEO_PATH = "C:/Users/goodf/Desktop/test3.mp4"
-CONFIDENCE_THRESHOLD = 0.5  # 신뢰도 기준값
+CONFIDENCE_THRESHOLD = 0.8  ########################## 신뢰도 기준 조저 가능
 
 # ============================
 # 모델 & 인코더 로드
 # ============================
+######################################## 제일 좋은 모델 넣으면됨됨
 model = load_model('C:/Users/goodf/Desktop/project/sign_model_u128_l2_d25.h5')
 encoder = joblib.load('label_encoder.pkl')
 
@@ -80,7 +81,8 @@ while cap.isOpened():
         confidence = np.max(prediction)
         pred_label = encoder.inverse_transform([np.argmax(prediction)])[0]
 
-        # 🔽 디버깅용 무조건 출력
+        ############################ 디버깅용 무조건 출력 confidence값 상관없이 무조건 나오는데 이건 내 테스트 영상 짧아서 안나오나 인식 못하나 확인할려고 넣은거거
+
         print(f"[DEBUG] 예측: {pred_label} | confidence: {confidence:.2f}")
 
         if confidence > CONFIDENCE_THRESHOLD:
@@ -103,3 +105,4 @@ if predictions:
     print(f"최종 번역 결과: {final_word}")
 else:
     print("\n예측된 결과가 없습니다.")
+
